@@ -1,0 +1,18 @@
+extends ../layout/common
+
+block content
+		.container
+			form(action="create", method="post", enctype='multipart/form-data')
+				.form-group.col-md-6
+					label Tên Sản Phẩm
+					input.form-control(type="text", name="tensp", value =values ? values.name : "")
+				.form-group.col-md-6
+					label Gía
+					input.form-control(type="text", name="gia", value=values ? values.age : "")
+				.form-group.col-md-6
+					label Mô Tả
+					input.form-control(type="text", name="tomtatsp", value=values ? values.age : "")
+				.form-group.col-md-6
+					label Ảnh SP
+					input.form-control-file(type="file", name="anhsp")
+				button.btn.btn-primary.ml-3 Create

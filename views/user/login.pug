@@ -1,0 +1,17 @@
+
+extends ../layout/common
+
+block content
+	.container
+		h1 Create User
+		if errs
+			each err in errs
+				.alert.alert-danger= err
+		form(action="/login/dologin", method="post")
+			.form-group.col-md-6
+				label Name
+				input.form-control(type="text", name="name")
+			.form-group.col-md-6
+				label Age
+				input.form-control(type="text", name="age")
+			button.btn.btn-primary Login
