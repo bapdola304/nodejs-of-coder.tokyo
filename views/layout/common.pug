@@ -5,6 +5,7 @@ html
 		script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
 		script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js')
 		script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js')
+		link(rel="stylesheet", href="/css/style.css")
 
 
 	body
@@ -18,9 +19,12 @@ html
 				li.nav-item
 					a.nav-link(href="/Products") Product
 				p= user ? user.name : ""
-				li.nav-item
-					a.nav-link(href="/users") Cart: 
-				p= carts + " item"
+				li.nav-item.cart
+						a.nav-link(href="#") Cart: 
+							=carts + " item"
+						.info-cart.col-md-4
+										
+
 
 		
 		block content

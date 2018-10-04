@@ -1,0 +1,23 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+.info-cart{
+	height: 400px;
+	background: grey;
+	position: absolute;
+	z-index: 2;
+	opacity: 0;
+	overflow: auto;
+}
+
+.cart:hover .info-cart{
+	opacity: 1;
+}
+.item{
+	display: flex;
+	margin: 10px;
+}
+.soluong{
+	margin-top: -60px;
+}
