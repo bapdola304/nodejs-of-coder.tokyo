@@ -14,7 +14,7 @@ var productRouter = require('./routes/product.router.js');
 var loginRouter = require('./routes/login.router.js');
 var middlewareLogin = require('./middlewares/login.middleware');
 var middlewareCart = require('./middlewares/cart.middleware');
-
+var GioHang = require('./controllers/cart.js');
 var cart = require('./routes/cart.route.js');
 var controller = require('./controllers/cart.controller');
 app.set('view engine', 'pug');
@@ -31,7 +31,13 @@ app.use(session({
 
 app.use(function(req, res, next){
 	res.locals.session = req.session;
-	// console.log(res.locals.soluong);
+	if(!req.session.cart){
+		res.locals.carthover = null;
+	}else{
+	var giohang = new GioHang(req.session.cart);
+	res.locals.carthover = giohang.getcart();
+}
+console.log(res.locals.carthover)
 	next();
 });
 

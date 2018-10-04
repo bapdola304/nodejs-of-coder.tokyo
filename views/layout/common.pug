@@ -20,11 +20,25 @@ html
 					a.nav-link(href="/Products") Product
 				p= user ? user.name : ""
 				li.nav-item.cart
-						a.nav-link(href="#") Cart: 
+					a.nav-link(href="/cart/shop-cart") Cart: 
 							span(class="badge")= session.cart ? session.cart.totalQty + " items" : 0 + " items"
-						.info-cart.col-md-4
+					.info-cart.col-md-4
+							if(carthover)
+								each pd in carthover
+									.item.d-flex
+										.col-sm-3
+											img(src="../"+ pd.item.anhsp, width="100")
+										.col-sm-3= pd.item.tensp
+										.col-sm-2= pd.soluong
+										.col-sm-2= pd.tien
+										.col-sm-2
+											a(href="/cart/delcart/"+ pd.item._id+"/" + pd.soluong, id="delcart", value=pd.item._id)
+												i.fas.fa-times(style="color:black")
+								h3= "Tổng Tiền: " + totalPrice ? totalPrice + " VND" : ""
+							else
+								p Giỏ Hàng Rỗng
 										
 
-
+	
 		
-		block content
+block content

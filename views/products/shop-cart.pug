@@ -1,0 +1,11 @@
+extends ../layout/common
+
+block content
+		.container
+			if(products)
+				each product in products
+					p= product.item.tensp
+					p= product.soluong
+					p= product.item.gia
+					p= product.tien
+				p= totalPrice

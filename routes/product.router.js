@@ -16,4 +16,5 @@ router.post('/create',upload.single('anhsp'), controller.postCreate);
 router.post('/edit/:id',upload.single('anhsp'), controller.edit);
 
 router.post('/search', controller.search);
+
 module.exports = router;

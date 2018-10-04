@@ -10,13 +10,30 @@ var giohang = new GioHang( (req.session.cart) ? req.session.cart : {items: {}} )
     product.findById(idproduct).then(function(data){
         giohang.add(idproduct, data);
         req.session.cart = giohang;
-         res.locals.soluong = req.session.cart.totalQty;
-        console.log(req.session.cart );
+  
+       console.log(req.session.cart);
        res.redirect('/products');
     });
 }
 
+module.exports.shopcart = function(req, res){
+	if(!req.session.cart){
+		res.render('products/shop-cart',{products : null});
+		return;
+	}
+	var giohang = new GioHang(req.session.cart);
+	res.render('products/shop-cart',{products : giohang.getcart(), totalPrice : giohang.totalPrice});
+}
+module.exports.delcart = function(req, res){
+	var id = req.params.id;
+	var sl = req.params.sl;
+	var giohang 	= new GioHang( (req.session.cart) ? req.session.cart : {items: {}} );
 
+	giohang.delCart(id,sl);
+	req.session.cart = giohang;
+
+	 res.redirect('/products');
+}
 // if (!sessionId) {
 //     res.redirect('/products');
 //     return;
