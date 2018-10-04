@@ -21,7 +21,7 @@ html
 				p= user ? user.name : ""
 				li.nav-item.cart
 						a.nav-link(href="#") Cart: 
-							=carts + " item"
+							span(class="badge")= session.cart ? session.cart.totalQty + " items" : 0 + " items"
 						.info-cart.col-md-4
 										
 
