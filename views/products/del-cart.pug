@@ -1,0 +1,18 @@
+#info-cart
+							if(products !== null)
+								each pd in products
+									.item.d-flex
+										.col-sm-3
+											img(src="../"+ pd.item.anhsp, width="100")
+										.col-sm-3= pd.item.tensp
+										.col-sm-2= pd.soluong
+										.col-sm-2= pd.tien
+										.col-sm-2
+											a(data-id=pd.item._id)
+												i.fas.fa-times(style="color:black",data-id=pd.item._id)
+								if(tongtien > 0)
+									h3= "Tổng Tiền: " + tongtien + " VND"
+									a(href="/cart/shop-cart")
+											.btn.btn-primary Tới Giỏ Hàng
+								else
+									h3= "Giỏ Hàng Rỗng"

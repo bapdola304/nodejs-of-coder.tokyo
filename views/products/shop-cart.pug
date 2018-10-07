@@ -2,10 +2,51 @@ extends ../layout/common
 
 block content
 		.container
-			if(products)
-				each product in products
-					p= product.item.tensp
-					p= product.soluong
-					p= product.item.gia
-					p= product.tien
-				p= totalPrice
+			h1= "Giỏ Hàng"
+				if(tongtien > 0)
+					table.table.table-bordered
+						thead
+							tr
+								th Hình Ảnh
+								th Tên Sản Phẩm
+								th Số Lượng
+								th Gía Tiền
+								th Xóa
+								th Cập Nhật
+						tbody(id="update")
+							each product in products
+								tr
+									th
+										img(src="../" + product.item.anhsp, width="100")
+									th= product.item.tensp
+									th
+										input(value= product.soluong, style= "width: 50px", id="updatesl"+product.item._id)
+									th= product.item.gia
+									th
+										a(href="delete/" + product.item._id)
+											i.far.fa-times-circle.mr-5
+									th
+										a(href="#", id="up" + product.item._id)
+											i.fab.fa-superpowers.mr-5(data-id=product.item._id)
+										
+					h3= "Tổng Tiền: " + tongtien + " VND"
+					.btn.btn-primary Thanh Toán
+
+				else
+					h5= "Chưa Có Giỏ Hàng"
+					
+				
+			script.
+				$(document).ready(function(){
+					$('#update').mouseover(function(e){
+						var a = e.target.dataset.id;						
+						if(a){
+							$('#up'+a).click(function(){
+								var sl =$('#updatesl'+ a).val();
+								window.location="update/" + a + "/" + sl;
+							});
+						}
+						// alert(id);
+						// window.location="update/" + id + "/" + sl;
+					});
+				});

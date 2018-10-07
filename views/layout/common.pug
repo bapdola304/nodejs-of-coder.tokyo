@@ -20,9 +20,11 @@ html
 					a.nav-link(href="/Products") Product
 				p= user ? user.name : ""
 				li.nav-item.cart
-					a.nav-link(href="/cart/shop-cart") Cart: 
-							span(class="badge")= session.cart ? session.cart.totalQty + " items" : 0 + " items"
+					a.nav-link(href="/cart/shop-cart") Cart:
+						span(id="soluong")
+							span(class="badge")= soluong  ? soluong+ " items" : 0 + " items"
 					.info-cart.col-md-4
+						#info-cart(value=soluong)
 							if(carthover)
 								each pd in carthover
 									.item.d-flex
@@ -32,13 +34,31 @@ html
 										.col-sm-2= pd.soluong
 										.col-sm-2= pd.tien
 										.col-sm-2
-											a(href="/cart/delcart/"+ pd.item._id+"/" + pd.soluong, id="delcart", value=pd.item._id)
-												i.fas.fa-times(style="color:black")
-								h3= "Tổng Tiền: " + totalPrice ? totalPrice + " VND" : ""
-							else
-								p Giỏ Hàng Rỗng
+											a(href="#")
+												i.fas.fa-times(style="color:black",data-id=pd.item._id)
+								if(tongtien > 0)
+									h3= "Tổng Tiền: " + tongtien + " VND"
+									a(href="/cart/shop-cart")
+											.btn.btn-primary Tới Giỏ Hàng
+								else
+									h3= "Giỏ Hàng Rỗng"
+						
 										
+		script.
+				$(document).ready(function(){
+									$('.info-cart').click(function(event){
+									
+										var item = event.target.dataset.id;
+									
+										$.get('/cart/delcart/'+item,function(data){
+											console.log(data);
+											$('#info-cart').replaceWith(data);
+											// $('#soluong').replaceWith(span= sl);
 
+										});
+										
+									});
+								});
 	
 		
 block content

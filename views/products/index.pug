@@ -31,11 +31,14 @@ block content
 										input.form-control-file(type="file", name="anhsp")
 						
 									button.btn.btn-primary.ml-3.pl-3 Add
+					input(type="hidden", value=page, id="page")
 		.row(id="content")
 			each product in products
 				.col-md-3
 					a(href="#" data-toggle="modal", data-target="#myModal"+product._id)
-						i.fas.fa-edit
+						i.fas.fa-edit.mr-5
+					a(href="products/delProduct/" + product._id)
+						i.fas.fa-times
 					.card
 						image.card-img-top(src=product.anhsp,style='width:100%',alt="Card image")
 							.card-body
@@ -63,27 +66,32 @@ block content
 									.form-group
 										label Ảnh SP
 										input.form-control-file(type="file", name="anhsp")
+
 										img.col-md-6(src=product.anhsp)
 									button.btn.btn-primary.ml-3.pl-3 Edit
 
-			ul.pagination.col-md-12
+		ul.pagination.col-md-12
 				li.page-item
 					a.page-link(href='#') Previous
+				-for (var i=1; i<= sotrang; i++)
+					li.page-item
+						a.page-link(href="/products?page=" + i)= i
 				li.page-item
-					a.page-link(href=`/products?page=${page -1}`)= page -1
-				li.page-item
-					a.page-link(href='/products?page=' + page)= page
-				li.page-item
-					a.page-link(href=`/products?page=${page-(-1)}`)= page -(-1)
+					a.page-link(href='#') Next
+			
 
 	script.
 		$(document).ready(function(){
 			$('#search').keyup(function(){
 				var data = $(this).val();
-				$.post('/products/search',{data : data },function(data){
+				var page = $('#page').val();
+				console.log(page);
+				$.post('/products/search',{data : data, page:page },function(data){
 					$('#content').replaceWith(data);
 				});
 
 			});
 		});
+
+
 			

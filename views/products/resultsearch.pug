@@ -2,7 +2,9 @@
 	each product in products
 		.col-md-3
 			a(href="#" data-toggle="modal", data-target="#myModal"+product._id)
-				i.fas.fa-edit
+				i.fas.fa-edit.mr-5
+			a(href="products/delProduct/" + product._id)
+						i.fas.fa-times
 			.card
 				image.card-img-top(src=product.anhsp,style='width:100%',alt="Card image")
 				.card-body

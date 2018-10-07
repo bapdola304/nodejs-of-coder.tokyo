@@ -30,14 +30,25 @@ app.use(session({
 }))
 
 app.use(function(req, res, next){
-	res.locals.session = req.session;
 	if(!req.session.cart){
 		res.locals.carthover = null;
+		res.locals.tongtien = null;
 	}else{
 	var giohang = new GioHang(req.session.cart);
+	var price = giohang.getcart();
+	console.log(price);
+	var tongtien = price.reduce(function(a,b){
+		return a + b.tien;
+	},0);
+	var soluong = price.reduce(function(a,b){
+		return a + b.soluong;
+	},0);
+	console.log(soluong);
+	res.locals.tongtien = tongtien;
 	res.locals.carthover = giohang.getcart();
+
 }
-console.log(res.locals.carthover)
+res.locals.soluong = soluong;
 	next();
 });
 

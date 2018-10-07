@@ -21,10 +21,13 @@ function GioHang (oldCart){
 		}
 		return arr;
 	}
-	this.delCart = function(id,sl){
+	this.delCart = function(id){
 		delete this.items[id];
-		this.totalQty-= sl;
-		this.totalPrice -= this.items[id].tien;
+
+	}
+	this.updateCart = function(id, sl){
+		this.items[id].soluong =parseInt(sl);
+		this.items[id].tien = this.items[id].item.gia * this.items[id].soluong;
 	}
 }
 	module.exports = GioHang;
